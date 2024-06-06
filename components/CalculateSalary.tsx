@@ -1,7 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useSalaryContext } from "../context/SalaryContext";
+import { useSalaryContext } from "../context/Context";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 function CalculateSalary() {
   const {
@@ -19,16 +24,25 @@ function CalculateSalary() {
     totalSalary,
   } = useSalaryContext();
 
+  const [newIncome, setNewIncome] = useState({
+    description: "",
+    value: 0,
+    epfEtfApplicable: false,
+  });
+  const [newExpense, setNewExpense] = useState({ description: "", value: 0 });
+
   const handleBaseSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBaseSalary(Number(e.target.value));
   };
 
   const handleAddIncome = () => {
-    addIncome({ description: "", value: 0, epfEtfApplicable: false });
+    addIncome(newIncome);
+    setNewIncome({ description: "", value: 0, epfEtfApplicable: false });
   };
 
   const handleAddExpense = () => {
-    addExpense({ description: "", value: 0 });
+    addExpense(newExpense);
+    setNewExpense({ description: "", value: 0 });
   };
 
   return (
@@ -37,7 +51,7 @@ function CalculateSalary() {
         <h3 className="text-[16px] md:text-xl font-bold">
           Calculate Your Salary
         </h3>
-        <button className="flex items-center gap-1" onClick={clearForm}>
+        <div className="flex items-center gap-1" onClick={clearForm}>
           <Image
             src="/images/reset-icon.svg"
             alt="reset-icon"
@@ -47,7 +61,7 @@ function CalculateSalary() {
           <span className="text-secondary-color font-medium text-[14px]">
             Reset
           </span>
-        </button>
+        </div>
       </div>
 
       {/* base salary */}
@@ -120,20 +134,62 @@ function CalculateSalary() {
           </div>
         ))}
 
-        <button
-          className="flex items-center gap-[9px] mt-[26px]"
-          onClick={handleAddIncome}
-        >
-          <Image
-            src="/images/plus-icon.svg"
-            alt="reset-icon"
-            width={14}
-            height={14}
-          />
-          <p className="text-[14px] font-medium text-secondary-color">
-            Add New Allowance
-          </p>
-        </button>
+        <Popover>
+          <PopoverTrigger>
+            <div className="flex items-center gap-[9px] mt-[26px]">
+              <Image
+                src="/images/plus-icon.svg"
+                alt="reset-icon"
+                width={14}
+                height={14}
+              />
+              <p className="text-[14px] font-medium text-secondary-color">
+                Add New Allowance
+              </p>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="flex flex-col gap-2">
+              <input
+                className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
+                type="text"
+                placeholder="Pay Details (Description)"
+                value={newIncome.description}
+                onChange={(e) =>
+                  setNewIncome({ ...newIncome, description: e.target.value })
+                }
+              />
+              <input
+                className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
+                type="number"
+                placeholder="Amount"
+                value={newIncome.value}
+                onChange={(e) =>
+                  setNewIncome({ ...newIncome, value: Number(e.target.value) })
+                }
+              />
+              <label className="flex items-center gap-2 text-text-secondary text-[12px]">
+                <input
+                  type="checkbox"
+                  checked={newIncome.epfEtfApplicable}
+                  onChange={() =>
+                    setNewIncome({
+                      ...newIncome,
+                      epfEtfApplicable: !newIncome.epfEtfApplicable,
+                    })
+                  }
+                />
+                EPF/ETF
+              </label>
+              <button
+                className="bg-secondary-color text-white py-2 px-4 rounded"
+                onClick={handleAddIncome}
+              >
+                Add
+              </button>
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
 
       {/* Expenses */}
@@ -182,22 +238,53 @@ function CalculateSalary() {
           </div>
         ))}
 
-        <button
-          className="flex items-center gap-[9px] mt-[26px]"
-          onClick={handleAddExpense}
-        >
-          <Image
-            src="/images/plus-icon.svg"
-            alt="reset-icon"
-            width={14}
-            height={14}
-          />
-          <p className="text-[14px] font-medium text-secondary-color">
-            Add New Deduction
-          </p>
-        </button>
+        <Popover>
+          <PopoverTrigger>
+            <div className="flex items-center gap-[9px] mt-[26px]">
+              <Image
+                src="/images/plus-icon.svg"
+                alt="reset-icon"
+                width={14}
+                height={14}
+              />
+              <p className="text-[14px] font-medium text-secondary-color">
+                Add New Deduction
+              </p>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="flex flex-col gap-2">
+              <input
+                className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
+                type="text"
+                placeholder="Expense Details (Description)"
+                value={newExpense.description}
+                onChange={(e) =>
+                  setNewExpense({ ...newExpense, description: e.target.value })
+                }
+              />
+              <input
+                className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
+                type="number"
+                placeholder="Amount"
+                value={newExpense.value}
+                onChange={(e) =>
+                  setNewExpense({
+                    ...newExpense,
+                    value: Number(e.target.value),
+                  })
+                }
+              />
+              <button
+                className="bg-secondary-color text-white py-2 px-4 rounded"
+                onClick={handleAddExpense}
+              >
+                Add
+              </button>
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
-      
     </div>
   );
 }
