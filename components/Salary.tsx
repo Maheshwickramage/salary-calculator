@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useSalaryContext } from "../context/SalaryContext";
+import { useSalaryContext } from "../context/Context";
 
 const Salary = () => {
   const { baseSalary, incomes, expenses, totalSalary } = useSalaryContext();
@@ -14,20 +14,35 @@ const Salary = () => {
   };
 
   const calculateEmployeeEpf = () => {
-    const applicableEarnings = incomes.filter((income) => income.epfEtfApplicable);
-    const totalApplicableEarnings = applicableEarnings.reduce((total, income) => total + income.value, baseSalary);
+    const applicableEarnings = incomes.filter(
+      (income) => income.epfEtfApplicable
+    );
+    const totalApplicableEarnings = applicableEarnings.reduce(
+      (total, income) => total + income.value,
+      baseSalary
+    );
     return totalApplicableEarnings * 0.08;
   };
 
   const calculateEmployerEpf = () => {
-    const applicableEarnings = incomes.filter((income) => income.epfEtfApplicable);
-    const totalApplicableEarnings = applicableEarnings.reduce((total, income) => total + income.value, baseSalary);
+    const applicableEarnings = incomes.filter(
+      (income) => income.epfEtfApplicable
+    );
+    const totalApplicableEarnings = applicableEarnings.reduce(
+      (total, income) => total + income.value,
+      baseSalary
+    );
     return totalApplicableEarnings * 0.12;
   };
 
   const calculateEmployerEtf = () => {
-    const applicableEarnings = incomes.filter((income) => income.epfEtfApplicable);
-    const totalApplicableEarnings = applicableEarnings.reduce((total, income) => total + income.value, baseSalary);
+    const applicableEarnings = incomes.filter(
+      (income) => income.epfEtfApplicable
+    );
+    const totalApplicableEarnings = applicableEarnings.reduce(
+      (total, income) => total + income.value,
+      baseSalary
+    );
     return totalApplicableEarnings * 0.03;
   };
 
@@ -78,13 +93,13 @@ const Salary = () => {
     <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg w-[320px] md:w-[480px]">
       <h3 className="text-xl font-bold">Your Salary</h3>
       <div className="mt-6">
-      
         <div className="flex justify-between">
           <p className="text-[14px] font-semibold text-text-secondary">Items</p>
-          <p className="text-[14px] font-semibold text-text-secondary">Amount</p>
+          <p className="text-[14px] font-semibold text-text-secondary">
+            Amount
+          </p>
         </div>
 
- 
         <div className="mt-4 flex flex-col gap-2">
           <div className="flex justify-between">
             <p>Basic Salary</p>
@@ -112,7 +127,6 @@ const Salary = () => {
           </div>
         </div>
 
-      
         <div>
           <div className="flex flex-col md:flex-row justify-between border border-bg-secondary rounded-[4px] p-4 mt-6">
             <p className="font-semibold">Net Salary (Take Home)</p>
@@ -120,7 +134,6 @@ const Salary = () => {
           </div>
         </div>
 
-      
         <div className="mt-6">
           <p className="text-[14px] font-semibold text-text-secondary">
             Contribution from the Employer
