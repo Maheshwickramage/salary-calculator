@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useSalaryContext } from "../context/Context";
+import { useSalary } from "../context/Context";
 import {
   Popover,
   PopoverContent,
@@ -21,7 +21,7 @@ function CalculateSalary() {
     modifyExpense,
     removeExpense,
     clearForm,
-  } = useSalaryContext();
+  } = useSalary();
 
   const [newIncome, setNewIncome] = useState({
     description: "",

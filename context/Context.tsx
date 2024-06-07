@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 
 type Income = {
   id: number;
@@ -14,7 +20,7 @@ type Expense = {
   value: number;
 };
 
-type SalaryContextProps = {
+type SalaryProps = {
   baseSalary: number;
   incomes: Income[];
   expenses: Expense[];
@@ -29,12 +35,12 @@ type SalaryContextProps = {
   clearForm: () => void;
 };
 
-const SalaryContext = createContext<SalaryContextProps | undefined>(undefined);
+const Salary = createContext<SalaryProps | undefined>(undefined);
 
-export const useSalaryContext = () => {
-  const context = useContext(SalaryContext);
+export const useSalary = () => {
+  const context = useContext(Salary);
   if (!context) {
-    throw new Error("A SalaryProvider must utilize useSalaryContext.");
+    throw new Error("A SalaryProvider must utilize useSalary.");
   }
   return context;
 };
@@ -93,10 +99,14 @@ export const SalaryProvider = ({ children }: SalaryProviderProps) => {
       .reduce((acc, income) => acc + income.value, 0);
 
     let totalEarnings = incomes.reduce((acc, income) => acc + income.value, 0);
-    let totalDeductions = expenses.reduce((acc, expense) => acc + expense.value, 0);
+    let totalDeductions = expenses.reduce(
+      (acc, expense) => acc + expense.value,
+      0
+    );
 
     // Calculate final salary
-    let finalSalary = baseSalary + totalEarnings - totalDeductions - epfEtfAmount;
+    let finalSalary =
+      baseSalary + totalEarnings - totalDeductions - epfEtfAmount;
 
     setTotalSalary(finalSalary);
   };
@@ -106,7 +116,7 @@ export const SalaryProvider = ({ children }: SalaryProviderProps) => {
   }, [baseSalary, incomes, expenses]);
 
   return (
-    <SalaryContext.Provider
+    <Salary.Provider
       value={{
         baseSalary,
         incomes,
@@ -123,6 +133,6 @@ export const SalaryProvider = ({ children }: SalaryProviderProps) => {
       }}
     >
       {children}
-    </SalaryContext.Provider>
+    </Salary.Provider>
   );
 };

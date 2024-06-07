@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { useSalaryContext } from "../context/Context";
+import { useSalary } from "../context/Context";
 
 const Salary = () => {
-  const { baseSalary, incomes, expenses, totalSalary } = useSalaryContext();
+  const { baseSalary, incomes, expenses } = useSalary();
 
   const calculateTotalEarnings = () => {
     return incomes.reduce((total, income) => total + income.value, baseSalary);
