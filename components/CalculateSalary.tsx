@@ -55,7 +55,6 @@ function CalculateSalary() {
         </div>
       </div>
 
-      {/* base salary */}
       <div className="mt-6">
         <p className="font-semibold">Basic Salary</p>
         <input
@@ -67,7 +66,6 @@ function CalculateSalary() {
         />
       </div>
 
-      {/* Incomes */}
       <div className="mt-6">
         <p className="font-semibold">Earnings</p>
         <p className="text-[12px] text-text-secondary mt-1">
@@ -187,7 +185,6 @@ function CalculateSalary() {
         </Popover>
       </div>
 
-      {/* Expenses */}
       <div className="mt-6">
         <p className="font-semibold">Deductions</p>
         <p className="text-[12px] text-text-secondary mt-1">

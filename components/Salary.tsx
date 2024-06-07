@@ -90,7 +90,7 @@ const Salary = () => {
   const ctc = netSalary + employerEpf + employerEtf;
 
   return (
-    <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg w-[320px] md:w-[480px]">
+    <div className="font-inter bg-white p-6 border border-bg-secondary rounded-lg w-[320px] md:w-[480px]">
       <h3 className="text-xl font-bold">Your Salary</h3>
       <div className="mt-6">
         <div className="flex justify-between">
