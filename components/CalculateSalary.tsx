@@ -21,7 +21,6 @@ function CalculateSalary() {
     modifyExpense,
     removeExpense,
     clearForm,
-    totalSalary,
   } = useSalaryContext();
 
   const [newIncome, setNewIncome] = useState({
@@ -46,21 +45,13 @@ function CalculateSalary() {
   };
 
   return (
-    <div className="font-inter bg-bg-main lg:w-[680px] p-6 border border-bg-secondary rounded-lg">
+    <div className="font-inter bg-bg-main lg:w-[680px] p-6 border border-bg-secondary rounded-lg ">
       <div className="flex justify-between items-center ">
-        <h3 className="text-[16px] md:text-xl font-bold">
+        <h3 className="text-[32px] md:text-xl font-bold">
           Calculate Your Salary
         </h3>
         <div className="flex items-center gap-1" onClick={clearForm}>
-          <Image
-            src="/images/reset-icon.svg"
-            alt="reset-icon"
-            width={21}
-            height={18}
-          />
-          <span className="text-secondary-color font-medium text-[14px]">
-            Reset
-          </span>
+          <Image src="/images/_Link.svg" alt="reset" width={66} height={40} />
         </div>
       </div>
 
@@ -121,13 +112,26 @@ function CalculateSalary() {
             <div className="flex items-center gap-4">
               <button
                 className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full"
+                onClick={() => modifyIncome}
+              >
+                <Image
+                  src="/images/edit.svg"
+                  alt="edit"
+                  width={32}
+                  height={32}
+                />
+              </button>
+            </div>
+            <div className="flex items-center gap-4">
+              <button
+                className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full"
                 onClick={() => removeIncome(income.id)}
               >
                 <Image
-                  src="/images/x-icon.svg"
-                  alt="reset-icon"
-                  width={12}
-                  height={12}
+                  src="/images/clear.svg"
+                  alt="clear"
+                  width={32}
+                  height={32}
                 />
               </button>
             </div>
@@ -137,23 +141,15 @@ function CalculateSalary() {
         <Popover>
           <PopoverTrigger>
             <div className="flex items-center gap-[9px] mt-[26px]">
-              <Image
-                src="/images/plus-icon.svg"
-                alt="reset-icon"
-                width={14}
-                height={14}
-              />
-              <p className="text-[14px] font-medium text-secondary-color">
-                Add New Allowance
-              </p>
+              <Image src="/images/add.svg" alt="add" width={162} height={40} />
             </div>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent className="bg-white p-6 rounded-lg shadow-lg w-[492px] h-[auto]">
             <div className="flex flex-col gap-2">
               <input
                 className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
                 type="text"
-                placeholder="Pay Details (Description)"
+                placeholder="Pay Details"
                 value={newIncome.description}
                 onChange={(e) =>
                   setNewIncome({ ...newIncome, description: e.target.value })
@@ -161,7 +157,6 @@ function CalculateSalary() {
               />
               <input
                 className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
-                type="number"
                 placeholder="Amount"
                 value={newIncome.value}
                 onChange={(e) =>
@@ -182,7 +177,7 @@ function CalculateSalary() {
                 EPF/ETF
               </label>
               <button
-                className="bg-secondary-color text-white py-2 px-4 rounded"
+                className="bg-secondary-color text-white py-2 px-4 rounded md:w-[132px]"
                 onClick={handleAddIncome}
               >
                 Add
@@ -207,7 +202,7 @@ function CalculateSalary() {
             <input
               className="bg-white w-full md:w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
               type="text"
-              placeholder="Expense Details (Description)"
+              placeholder="Expense Details"
               value={expense.description}
               onChange={(e) =>
                 modifyExpense(expense.id, { description: e.target.value })
@@ -225,13 +220,26 @@ function CalculateSalary() {
             <div className="flex items-center gap-4">
               <button
                 className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full"
+                onClick={() => modifyIncome}
+              >
+                <Image
+                  src="/images/edit.svg"
+                  alt="edit"
+                  width={32}
+                  height={32}
+                />
+              </button>
+            </div>
+            <div className="flex items-center gap-4 ">
+              <button
+                className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full"
                 onClick={() => removeExpense(expense.id)}
               >
                 <Image
-                  src="/images/x-icon.svg"
-                  alt="reset-icon"
-                  width={12}
-                  height={12}
+                  src="/images/clear.svg"
+                  alt="clear"
+                  width={32}
+                  height={32}
                 />
               </button>
             </div>
@@ -242,17 +250,14 @@ function CalculateSalary() {
           <PopoverTrigger>
             <div className="flex items-center gap-[9px] mt-[26px]">
               <Image
-                src="/images/plus-icon.svg"
-                alt="reset-icon"
-                width={14}
-                height={14}
+                src="/images/deduct.svg"
+                alt="deduct"
+                width={162}
+                height={40}
               />
-              <p className="text-[14px] font-medium text-secondary-color">
-                Add New Deduction
-              </p>
             </div>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent className="bg-white p-6 rounded-lg shadow-lg w-[492px] h-[auto]">
             <div className="flex flex-col gap-2">
               <input
                 className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
@@ -265,7 +270,6 @@ function CalculateSalary() {
               />
               <input
                 className="bg-white py-3 px-[15px] rounded outline-none border border-bg-secondary"
-                type="number"
                 placeholder="Amount"
                 value={newExpense.value}
                 onChange={(e) =>
@@ -276,7 +280,7 @@ function CalculateSalary() {
                 }
               />
               <button
-                className="bg-secondary-color text-white py-2 px-4 rounded"
+                className="bg-secondary-color text-white py-2 px-4 rounded md:w-[132px]"
                 onClick={handleAddExpense}
               >
                 Add

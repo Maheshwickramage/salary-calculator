@@ -34,7 +34,7 @@ const SalaryContext = createContext<SalaryContextProps | undefined>(undefined);
 export const useSalaryContext = () => {
   const context = useContext(SalaryContext);
   if (!context) {
-    throw new Error("useSalaryContext must be used within a SalaryProvider");
+    throw new Error("A SalaryProvider must utilize useSalaryContext.");
   }
   return context;
 };
