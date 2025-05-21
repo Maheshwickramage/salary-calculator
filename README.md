@@ -11,3 +11,5 @@
 2. Install dependencies by running `npm install`.
 
 3. Run `npm run dev` to start the app.
+
+Hello this is test text for codacy
